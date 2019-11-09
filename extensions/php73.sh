@@ -32,12 +32,6 @@ if [ -z "${EXTENSIONS##*,mongodb,*}" ]; then
     docker-php-ext-enable mongodb
 fi
 
-if [ -z "${EXTENSIONS##*,yaf,*}" ]; then
-    echo "---------- Install yaf ----------"
-    pecl install yaf
-    docker-php-ext-enable yaf
-fi
-
 if [ -z "${EXTENSIONS##*,amqp,*}" ]; then
     echo "---------- Install amqp ----------"
     apk add --no-cache rabbitmq-c-dev
@@ -66,7 +60,7 @@ fi
 if [ -z "${EXTENSIONS##*,xdebug,*}" ]; then
     echo "---------- Install xdebug ----------"
     mkdir xdebug \
-    && tar -xf xdebug-2.8.0.tar.gz -C xdebug --strip-components=1 \
+    && tar -xf xdebug-2.8.0.tgz -C xdebug --strip-components=1 \
     && ( cd xdebug && phpize && ./configure && make ${MC} && make install ) \
     && docker-php-ext-enable xdebug
 fi
@@ -75,7 +69,7 @@ fi
 if [ -z "${EXTENSIONS##*,swoole,*}" ]; then
     echo "---------- Install swoole ----------"
     mkdir swoole \
-    && tar -xf swoole-src-4.4.11.tar.gz -C swoole --strip-components=1 \
+    && tar -xf swoole-4.4.12.tgz -C swoole --strip-components=1 \
     && ( cd swoole && phpize && ./configure --enable-openssl && make ${MC} && make install ) \
     && docker-php-ext-enable swoole
 fi
@@ -100,16 +94,11 @@ if [ -z "${EXTENSIONS##*,apcu,*}" ]; then
     docker-php-ext-enable apcu
 fi
 
-if [ -z "${EXTENSIONS##*,yaconf,*}" ]; then
-    echo "---------- Install yaconf ----------"
-	pecl install yaconf
-    docker-php-ext-enable yaconf
-fi
 
 if [ -z "${EXTENSIONS##*,xhprof,*}" ]; then
     echo "---------- Install xhprof ----------"
     mkdir xhprof \
-    && tar -xf xhprof-5.0.1.tar.gz -C xhprof --strip-components=1 \
+    && tar -xf xhprof-2.1.0.tgz -C xhprof --strip-components=1 \
     && ( cd xhprof/extension && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make ${MC} && make install ) \
     && docker-php-ext-enable xhprof
 fi
