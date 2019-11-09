@@ -21,6 +21,11 @@ if [ "${PHP_EXTENSIONS}" != "" ]; then
     apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers
 fi
 
+if [ -z "${EXTENSIONS##*,pdo_pgsql,*}" ]; then
+    echo "---------- Install pdo_pgsql ----------"
+    docker-php-ext-install ${MC} pdo_pgsql
+fi
+
 if [ -z "${EXTENSIONS##*,pdo_mysql,*}" ]; then
     echo "---------- Install pdo_mysql ----------"
     docker-php-ext-install ${MC} pdo_mysql
