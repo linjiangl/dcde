@@ -102,3 +102,9 @@ if [ -z "${EXTENSIONS##*,xhprof,*}" ]; then
     && ( cd xhprof/extension && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make ${MC} && make install ) \
     && docker-php-ext-enable xhprof
 fi
+
+if [ -z "${EXTENSIONS##*,protobuf,*}" ]; then
+    echo "---------- Install protobuf ----------"
+	pecl install protobuf-3.10.0
+    docker-php-ext-enable protobuf
+fi
