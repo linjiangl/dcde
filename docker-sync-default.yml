@@ -1,0 +1,19 @@
+version: '2'
+
+options:
+  verbose: false
+
+syncs:
+  unison-sync:
+    # 需要挂载的目录
+    src: '/path/to/app'
+    # 同步策略 macOS 推荐 native_osx，Windows 配置为 unison
+    sync_strategy: unison
+    # 这里的用户 ID 为 1000，请确认你的 php-fpm 为同一个用户
+    sync_userid: 1000
+    # 忽略的文件
+    sync_excludes: [
+      '.gitignore',
+      '.git/',
+      '.DS_Store',
+    ]
