@@ -16,4 +16,6 @@ syncs:
       '.gitignore',
       '.git/',
       '.DS_Store',
+      'projectDir/*/runtime',
+      'projectDir/*/vendor',
     ]
