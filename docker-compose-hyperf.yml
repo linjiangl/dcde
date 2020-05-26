@@ -8,8 +8,6 @@ services:
       - '${HYPERF_HOST_PORT}:9501'
     volumes:
       - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
-    environment:
-      APP_ENV: dev
     tty: true
     networks:
       - default

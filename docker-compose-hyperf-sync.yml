@@ -13,8 +13,6 @@ services:
       - '${HYPERF_HOST_PORT}:9501'
     volumes:
       - unison-sync:/hyperf-skeleton/:nocopy
-    environment:
-      APP_ENV: dev
     tty: true
     networks:
       - default
