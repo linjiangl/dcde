@@ -108,3 +108,9 @@ if [ -z "${EXTENSIONS##*,protobuf,*}" ]; then
 	pecl install protobuf-3.10.0
     docker-php-ext-enable protobuf
 fi
+
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/local/bin/composer
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/

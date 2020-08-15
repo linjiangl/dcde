@@ -31,7 +31,6 @@ services:
       - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP73_LOG_DIR}:/var/log/php
-      - ${PHP73_COMPOSER}:/usr/local/bin/composer
     restart: always
     cap_add:
       - SYS_PTRACE
