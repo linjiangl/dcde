@@ -3,11 +3,11 @@
 ```
 /
 ├── conf                        配置文件目录
-│   ├── conf.d                  Nginx用户站点配置目录
-│   ├── nginx.conf              Nginx默认配置文件
-│   ├── mysql.cnf               MySQL用户配置文件
-│   ├── php-fpm.conf            PHP-FPM配置文件（部分会覆盖php.ini配置）
-│   └── php.ini                 PHP默认配置文件
+│ ├── conf.d                  Nginx用户站点配置目录
+│ ├── nginx.conf              Nginx默认配置文件
+│ ├── mysql.cnf               MySQL用户配置文件
+│ ├── php-fpm.conf            PHP-FPM配置文件（部分会覆盖php.ini配置）
+│ └── php.ini                 PHP默认配置文件
 ├── Dockerfile                  PHP镜像构建文件
 ├── extensions                  PHP扩展源码包
 ├── log                         日志目录
@@ -42,21 +42,7 @@ $ docker-compose build          # 重建全部服务
 Then reload nginx:
 
 ```bash
-$ docker exec -it docker-lnmp_nginx_1 nginx -s reload
-```
-
-## 添加快捷命令
-
-在开发的时候，我们可能经常使用`docker exec -it`切换到容器中，把常用的做成命令别名是个省事的方法。
-
-打开~/.bashrc，加上：
-
-```bash
-alias dnginx='docker exec -it docker-lnmp_nginx_1 /bin/sh'
-alias dphp73='docker exec -it docker-lnmp_php73_1 /bin/sh'
-alias dphp56='docker exec -it docker-lnmp_php56_1 /bin/sh'
-alias dmysql='docker exec -it docker-lnmp_mysql_1 /bin/bash'
-alias dredis='docker exec -it docker-lnmp_redis_1 /bin/sh'
+$ docker exec -it dngix nginx -s reload
 ```
 
 ## 使用 Log
