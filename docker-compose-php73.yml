@@ -13,24 +13,24 @@ services:
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
     links:
-      - php74:php-fpm
+      - php73:php-fpm
     networks:
       - default
 
-  php74:
-    container_name: dphp
+  php73:
+    container_name: dphp73
     build:
       context: .
       args:
-        PHP_VERSION: ${PHP_VERSION}
+        PHP_VERSION: ${PHP73_VERSION}
         ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
-        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
-        MORE_EXTENSION_INSTALLER: php74.sh
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php73.sh
     volumes:
       - ${SOURCE_DIR}:/var/www/html/:rw
-      - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP_LOG_DIR}:/var/log/php
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
     restart: always
     cap_add:
       - SYS_PTRACE
