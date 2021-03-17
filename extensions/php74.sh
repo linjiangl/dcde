@@ -32,19 +32,17 @@ if [ -z "${EXTENSIONS##*,mongodb,*}" ]; then
     docker-php-ext-enable mongodb
 fi
 
-cd /tmp/extensions/php74
-
 if [ -z "${EXTENSIONS##*,amqp,*}" ]; then
     echo "---------- Install amqp ----------"
     apk add --no-cache rabbitmq-c-dev
-    pecl install amqp-1.10.2.tgz
+    pecl install /tmp/extensions/php74/amqp-1.10.2.tgz
     docker-php-ext-enable amqp
 fi
 
 if [ -z "${EXTENSIONS##*,redis,*}" ]; then
     echo "---------- Install redis ----------"
     mkdir redis \
-    && tar -xf redis-5.3.3.tgz -C redis --strip-components=1 \
+    && tar -xf /tmp/extensions/php74/redis-5.3.3.tgz -C redis --strip-components=1 \
     && ( cd redis && phpize && ./configure && make ${MC} && make install ) \
     && docker-php-ext-enable redis
 fi
@@ -60,9 +58,7 @@ fi
 
 if [ -z "${EXTENSIONS##*,xdebug,*}" ]; then
     echo "---------- Install xdebug ----------"
-    mkdir xdebug \
-    && tar -xf xdebug-3.0.3.tgz -C xdebug --strip-components=1 \
-    && ( cd xdebug && phpize && ./configure && make ${MC} && make install ) \
+    pecl install /tmp/extensions/php74/xdebug-2.9.8.tgz \
     && docker-php-ext-enable xdebug
 fi
 
@@ -70,7 +66,7 @@ fi
 if [ -z "${EXTENSIONS##*,swoole,*}" ]; then
     echo "---------- Install swoole ----------"
     mkdir swoole \
-    && tar -xf swoole-4.6.4.tgz -C swoole --strip-components=1 \
+    && tar -xf /tmp/extensions/php74/swoole-4.6.4.tgz -C swoole --strip-components=1 \
     && ( cd swoole && phpize && ./configure --enable-openssl && make ${MC} && make install ) \
     && docker-php-ext-enable swoole
 fi
@@ -99,7 +95,7 @@ fi
 if [ -z "${EXTENSIONS##*,xhprof,*}" ]; then
     echo "---------- Install xhprof ----------"
     mkdir xhprof \
-    && tar -xf xhprof-2.2.3.tgz -C xhprof --strip-components=1 \
+    && tar -xf /tmp/extensions/php74/xhprof-2.2.3.tgz -C xhprof --strip-components=1 \
     && ( cd xhprof/extension && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make ${MC} && make install ) \
     && docker-php-ext-enable xhprof
 fi

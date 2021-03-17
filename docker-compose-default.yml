@@ -12,13 +12,13 @@ services:
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
-    links:
-      - php74:php-fpm
+    depends_on:
+      - php74
     networks:
       - default
 
   php74:
-    container_name: dphp
+    container_name: dphp74
     build:
       context: .
       args:
@@ -36,6 +36,8 @@ services:
       - SYS_PTRACE
     networks:
       - default
+    environment:
+      TZ: "Asia/Shanghai"
 
   mysql:
     container_name: dmysql
