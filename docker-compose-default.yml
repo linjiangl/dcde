@@ -12,8 +12,8 @@ services:
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
-    depends_on:
-      - php74
+    links:
+      - php74:php-fpm
     networks:
       - default
 
