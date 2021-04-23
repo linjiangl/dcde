@@ -6,7 +6,7 @@ default-character-set   = utf8mb4
 [mysqld]
 user                    = mysql
 port                    = 3306
-sql_mode                = ""
+sql_mode                = STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
 
 default-storage-engine  = InnoDB
 default-authentication-plugin   = mysql_native_password
