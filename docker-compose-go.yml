@@ -1,0 +1,47 @@
+version: '3'
+services:
+  golang:
+    container_name: dgolang
+    build: ./golang
+    ports:
+      - '${GOLANG_HOST_PORT}:8088'
+    volumes:
+      - ${GOLANG_WORK_DIR}:/app/go-work:rw
+    restart: always
+    networks:
+      - default
+
+  mysql:
+    container_name: dmysql
+    image: mysql:${MYSQL_VERSION}
+    ports:
+      - '${MYSQL_HOST_PORT}:3306'
+    volumes:
+      - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql/:rw
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.24.0.201
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+
+  redis:
+    container_name: dredis
+    image: redis:${REDIS_VERSION}
+    ports:
+      - '${REDIS_HOST_PORT}:6379'
+    volumes:
+      - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
+    restart: always
+    entrypoint: ['redis-server', '/etc/redis.conf']
+    networks:
+      default:
+        ipv4_address: 172.24.0.202
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/16
