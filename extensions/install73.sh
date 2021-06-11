@@ -18,8 +18,7 @@ fi
 
 if [ "${PHP_EXTENSIONS}" != "" ]; then
     echo "---------- Install general dependencies ----------"
-    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers libzip libzip-dev
-    docker-php-ext-install ${MC} iconv
+    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers
 fi
 
 if [ -z "${EXTENSIONS##*,pdo_pgsql,*}" ]; then
@@ -34,27 +33,27 @@ fi
 
 if [ -z "${EXTENSIONS##*,zip,*}" ]; then
     echo "---------- Install zip ----------"
-	  docker-php-ext-install ${MC} zip
+	docker-php-ext-install ${MC} zip
 fi
 
 if [ -z "${EXTENSIONS##*,pcntl,*}" ]; then
     echo "---------- Install pcntl ----------"
-    docker-php-ext-install ${MC} pcntl
+	docker-php-ext-install ${MC} pcntl
 fi
 
 if [ -z "${EXTENSIONS##*,mysqli,*}" ]; then
     echo "---------- Install mysqli ----------"
-    docker-php-ext-install ${MC} mysqli
+	docker-php-ext-install ${MC} mysqli
 fi
 
 if [ -z "${EXTENSIONS##*,mbstring,*}" ]; then
     echo "---------- Install mbstring ----------"
-    docker-php-ext-install ${MC} mbstring
+	docker-php-ext-install ${MC} mbstring
 fi
 
 if [ -z "${EXTENSIONS##*,exif,*}" ]; then
     echo "---------- Install exif ----------"
-    docker-php-ext-install ${MC} exif
+	docker-php-ext-install ${MC} exif
 fi
 
 if [ -z "${EXTENSIONS##*,bcmath,*}" ]; then
@@ -162,9 +161,9 @@ fi
 
 if [ -z "${EXTENSIONS##*,gd,*}" ]; then
     echo "---------- Install gd ----------"
-    apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev
-    # && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    docker-php-ext-install ${MC} gd
+    apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install ${MC} gd
 fi
 
 if [ -z "${EXTENSIONS##*,intl,*}" ]; then

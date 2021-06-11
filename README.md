@@ -27,14 +27,14 @@
 $ cd docker-lnmp
 $ cp env.sample .env
 $ cp docker-compose-sample.yml docker-compose.yml
-$ docker-compose build
+$ docker-compose build --no-cache
 $ docker-compose up -d
 ```
 
 要修改端口、日志文件位置等，请修改**.env**文件，然后重新构建：
 
 ```bash
-$ docker-compose build php73    # 重建单个服务
+$ docker-compose build php74    # 重建单个服务
 $ docker-compose build          # 重建全部服务
 
 ```
