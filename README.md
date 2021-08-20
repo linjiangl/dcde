@@ -19,7 +19,7 @@
 
 结构示意图：
 
-![Demo Image](./dnmp.png)
+![Demo Image](./image/dnmp.png)
 
 ## 快速使用
 
@@ -97,3 +97,7 @@ log-error               = /var/lib/mysql/mysql.error.log
 ```
 
 以上是 mysql.conf 中的日志文件的配置。
+
+### 欢迎捐赠
+
+![Demo Image](./image/alipay.png)
