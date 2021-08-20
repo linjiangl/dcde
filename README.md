@@ -100,4 +100,4 @@ log-error               = /var/lib/mysql/mysql.error.log
 
 ### 欢迎捐赠
 
-![Demo Image](./image/alipay.png)
+![Demo Image](./image/alipay.jpg)
