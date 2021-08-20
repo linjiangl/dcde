@@ -98,6 +98,12 @@ log-error               = /var/lib/mysql/mysql.error.log
 
 以上是 mysql.conf 中的日志文件的配置。
 
-### 欢迎捐赠
+### 欢迎捐赠，感谢各位捐赠
 
 ![Demo Image](./image/alipay.jpg)
+
+### 捐赠列表top10
+
+1. 胡大帅  ￥1000
+2. 蒋某总  ￥500
+3. 方白逸  ￥500
