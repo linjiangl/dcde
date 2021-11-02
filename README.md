@@ -42,7 +42,7 @@ $ docker-compose build          # 重建全部服务
 Then reload nginx:
 
 ```bash
-$ docker exec -it dngix nginx -s reload
+$ docker exec -it dnginx nginx -s reload
 ```
 
 ## 使用 Log
