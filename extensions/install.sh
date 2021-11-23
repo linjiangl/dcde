@@ -18,7 +18,7 @@ fi
 
 if [ "${PHP_EXTENSIONS}" != "" ]; then
     echo "---------- Install general dependencies ----------"
-    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers libzip libzip-dev
+    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers libzip libzip-dev freetds-dev
     docker-php-ext-install ${MC} iconv
 fi
 
@@ -114,7 +114,9 @@ fi
 
 if [ -z "${EXTENSIONS##*,pdo_dblib,*}" ]; then
     echo "---------- Install pdo_dblib ----------"
-	docker-php-ext-install ${MC} pdo_dblib
+    docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu
+
+	  docker-php-ext-install ${MC} pdo_dblib
 fi
 
 if [ -z "${EXTENSIONS##*,pdo_oci,*}" ]; then
