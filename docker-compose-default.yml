@@ -17,6 +17,26 @@ services:
     networks:
       - default
 
+#  php73:
+#    container_name: dphp73
+#    build:
+#      context: .
+#      args:
+#        PHP_VERSION: ${PHP73_VERSION}
+#        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+#        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
+#        MORE_EXTENSION_INSTALLER: php73.sh
+#    volumes:
+#      - ${SOURCE_DIR}:/var/www/html/:rw
+#      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP73_LOG_DIR}:/var/log/php
+#    restart: always
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
+
   php74:
     container_name: dphp74
     build:
@@ -54,6 +74,22 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
 
+#  postgres:
+#    image: postgres:${POSTGRES_VERSION}
+#    container_name: dpostgres
+#    environment:
+#      POSTGRES_DB: ${POSTGRES_DB}
+#      POSTGRES_USER: ${POSTGRES_USER}
+#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#      PGDATA: /var/lib/postgresql/data/data/
+#    ports:
+#      - '${POSTGRES_HOST_PORT}:5432'
+#    volumes:
+#      - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data:rw
+#    networks:
+#      default:
+#        ipv4_address: 172.24.0.203
+
   redis:
     container_name: dredis
     image: redis:${REDIS_VERSION}
@@ -78,6 +114,42 @@ services:
     environment:
       - PMA_HOST=mysql
       - PMA_PORT=3306
+
+#  hyperf:
+#    image: hyperf/hyperf:${HYPERF_VERSION}
+#    container_name: dhyperf
+#    restart: always
+#    ports:
+#      - '${HYPERF_HOST_PORT}:9501'
+#    volumes:
+#      - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
+#    tty: true
+#    networks:
+#      - default
+
+#  golang:
+#    container_name: dgolang
+#    build: ./golang
+#    ports:
+#      - '${GOLANG_HOST_PORT}:8088'
+#    volumes:
+#      - ${GOLANG_WORK_DIR}:/app/go-work:rw
+#    restart: always
+#    networks:
+#      - default
+
+#  rabbitmq:
+#    build:
+#      context: ./build/rabbit
+#      args:
+#        RABBITMQ_VERSION: ${RABBITMQ_VERSION}
+#    container_name: drabbitmq
+#    restart: always
+#    ports:
+#      - '${RABBITMQ_HOST_PORT}:15672'
+#    tty: true
+#    networks:
+#      - default
 
 networks:
   default:

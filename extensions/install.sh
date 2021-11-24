@@ -18,7 +18,7 @@ fi
 
 if [ "${PHP_EXTENSIONS}" != "" ]; then
     echo "---------- Install general dependencies ----------"
-    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers libzip libzip-dev freetds-dev
+    apk add --no-cache autoconf g++ libtool make curl-dev libxml2-dev linux-headers libzip libzip-dev
     docker-php-ext-install ${MC} iconv
 fi
 
@@ -114,8 +114,8 @@ fi
 
 if [ -z "${EXTENSIONS##*,pdo_dblib,*}" ]; then
     echo "---------- Install pdo_dblib ----------"
+    apk add freetds-dev
     docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu
-
 	  docker-php-ext-install ${MC} pdo_dblib
 fi
 
@@ -160,16 +160,6 @@ if [ -z "${EXTENSIONS##*,interbase,*}" ]; then
     echo "---------- Install interbase ----------"
     echo "Alpine linux do not support interbase/firebird!!!"
 	#docker-php-ext-install ${MC} interbase
-fi
-
-if [ -z "${EXTENSIONS##*,gd,*}" ]; then
-    echo "---------- Install gd ----------"
-    apk add --no-cache freetype freetype-dev libjpeg-turbo libjpeg-turbo-dev libpng libpng-dev libwebp-dev
-    # php 7.3
-    docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/
-    # php 7.4
-    # docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
-    docker-php-ext-install ${MC} gd
 fi
 
 if [ -z "${EXTENSIONS##*,intl,*}" ]; then

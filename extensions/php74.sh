@@ -106,6 +106,13 @@ if [ -z "${EXTENSIONS##*,protobuf,*}" ]; then
     docker-php-ext-enable protobuf
 fi
 
+if [ -z "${EXTENSIONS##*,gd,*}" ]; then
+    echo "---------- Install gd ----------"
+    apk add --no-cache freetype freetype-dev libjpeg-turbo libjpeg-turbo-dev libpng libpng-dev libwebp-dev
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
+    docker-php-ext-install ${MC} gd
+fi
+
 cd /tmp
 php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
 php composer-setup.php

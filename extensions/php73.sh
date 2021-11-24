@@ -111,6 +111,13 @@ if [ -z "${EXTENSIONS##*,protobuf,*}" ]; then
     docker-php-ext-enable protobuf
 fi
 
+if [ -z "${EXTENSIONS##*,gd,*}" ]; then
+    echo "---------- Install gd ----------"
+    apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install ${MC} gd
+fi
+
 php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
