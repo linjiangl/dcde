@@ -119,16 +119,6 @@ if [ -z "${EXTENSIONS##*,pdo_dblib,*}" ]; then
 	  docker-php-ext-install ${MC} pdo_dblib
 fi
 
-if [ -z "${EXTENSIONS##*,pdo_oci,*}" ]; then
-    echo "---------- Install pdo_oci ----------"
-	docker-php-ext-install ${MC} pdo_oci
-fi
-
-if [ -z "${EXTENSIONS##*,pdo_odbc,*}" ]; then
-    echo "---------- Install pdo_odbc ----------"
-	docker-php-ext-install ${MC} pdo_odbc
-fi
-
 if [ -z "${EXTENSIONS##*,pdo_pgsql,*}" ]; then
     echo "---------- Install pdo_pgsql ----------"
     apk --no-cache add postgresql-dev \
@@ -139,16 +129,6 @@ if [ -z "${EXTENSIONS##*,pgsql,*}" ]; then
     echo "---------- Install pgsql ----------"
     apk --no-cache add postgresql-dev \
     && docker-php-ext-install ${MC} pgsql
-fi
-
-if [ -z "${EXTENSIONS##*,oci8,*}" ]; then
-    echo "---------- Install oci8 ----------"
-	docker-php-ext-install ${MC} oci8
-fi
-
-if [ -z "${EXTENSIONS##*,odbc,*}" ]; then
-    echo "---------- Install odbc ----------"
-	docker-php-ext-install ${MC} odbc
 fi
 
 if [ -z "${EXTENSIONS##*,dba,*}" ]; then
