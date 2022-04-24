@@ -148,7 +148,7 @@ services:
 #       RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
 #       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
 #    networks:
-#          - default
+#      - default
 
 #  phpmyadmin:
 #    image: phpmyadmin/5.1.3-fpm-alpine:latest
