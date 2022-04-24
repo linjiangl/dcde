@@ -161,7 +161,7 @@ services:
 #    networks:
 #      - default
 #    environment:
-#      - PMA_HOST=mysql
+#      - PMA_HOST=mysql8
 #      - PMA_PORT=3306
 #      - TZ=$TZ
 
