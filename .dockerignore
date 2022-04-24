@@ -1,3 +1,5 @@
 log/
 mysql/
 www/
+image/
+services/nginx/ssl/
