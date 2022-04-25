@@ -40,7 +40,6 @@ services:
       - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
@@ -61,12 +60,31 @@ services:
       - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP80_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
     networks:
       - default
+
+#  php81:
+#    build:
+#      context: ./services/php81
+#      args:
+#        PHP_VERSION: php:${PHP81_VERSION}-fpm-alpine
+#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+#        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
+#        TZ: "$TZ"
+#    container_name: php81
+#    volumes:
+#      - ${SOURCE_DIR}:/www/:rw
+#      - ${PHP81_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP81_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP81_LOG_DIR}:/var/log/php
+#    restart: always
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
 
   mysql8:
     image: mysql/mysql-server:${MYSQL8_VERSION}
