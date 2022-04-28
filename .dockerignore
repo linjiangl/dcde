@@ -1,5 +1,4 @@
-log/
-mysql/
+logs/
+data/
 www/
-image/
 services/nginx/ssl/
