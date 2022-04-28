@@ -1,6 +1,5 @@
 > 本地开发集成环境
 
-
 # 目录结构
 
 ```
@@ -32,3 +31,34 @@
 │   └── hyperf                  Hyperf 程序目录
 └── www                         PHP 代码目录
 ```
+
+# 安装
+```
+$ git clone git@github.com:linjiangl/docker-web-server.git 
+$ cd docker-web-server
+$ cp .env.sample .env
+$ cp docker-compose.sample.yml docker-compose.yml
+$ docker-compose build
+$ docker-compose up -d
+```
+
+# 常用命令
+``` 
+$ docker-compose up                         # 创建并且启动所有容器
+$ docker-compose up -d                      # 创建并且后台运行方式启动所有容器
+$ docker-compose up nginx php80 mysql8      # 创建并且启动nginx、php、mysql的多个容器
+$ docker-compose up -d nginx php80 mysql8   # 创建并且已后台运行的方式启动nginx、php、mysql容器
+
+$ docker-compose start nginx                # 启动服务
+$ docker-compose stop nginx                 # 停止服务
+$ docker-compose restart nginx              # 重启服务
+$ docker-compose build nginx                # 构建或者重新构建服务
+
+$ docker-compose rm nginx                   # 删除并且停止php容器
+$ docker-compose down                       # 停止并删除容器，网络，图像和挂载卷
+```
+
+
+### 鸣谢
+
+> [`dnmp`](https://github.com/yeszao/dnmp) 
