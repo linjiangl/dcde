@@ -46,25 +46,25 @@ services:
     networks:
       - default
 
-  php80:
-    build:
-      context: ./services/php80
-      args:
-        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
-        TZ: "$TZ"
-    container_name: php80
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP80_LOG_DIR}:/var/log/php
-    restart: always
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - default
+#  php80:
+#    build:
+#      context: ./services/php80
+#      args:
+#        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
+#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+#        TZ: "$TZ"
+#    container_name: php80
+#    volumes:
+#      - ${SOURCE_DIR}:/www/:rw
+#      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP80_LOG_DIR}:/var/log/php
+#    restart: always
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
 
 #  php81:
 #    build:
@@ -115,22 +115,22 @@ services:
     networks:
       - default
 
-  mysql5:
-    image: mysql/mysql-server:${MYSQL5_VERSION}
-    container_name: mysql5
-    ports:
-      - "${MYSQL5_HOST_PORT}:3306"
-    volumes:
-      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
-      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
-      - ${MYSQL5_LOG_DIR}:/var/log/mysql/:rw
-    environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
-      MYSQL_ROOT_HOST: "${MYSQL5_ROOT_HOST}"
-      TZ: "$TZ"
-    restart: always
-    networks:
-      - default
+#  mysql5:
+#    image: mysql/mysql-server:${MYSQL5_VERSION}
+#    container_name: mysql5
+#    ports:
+#      - "${MYSQL5_HOST_PORT}:3306"
+#    volumes:
+#      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+#      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
+#      - ${MYSQL5_LOG_DIR}:/var/log/mysql/:rw
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
+#      MYSQL_ROOT_HOST: "${MYSQL5_ROOT_HOST}"
+#      TZ: "$TZ"
+#    restart: always
+#    networks:
+#      - default
 
   redis:
     image: redis:${REDIS_VERSION}

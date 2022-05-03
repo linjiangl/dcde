@@ -12,7 +12,7 @@ $i++; // server 1 :
 $cfg['Servers'][$i]['verbose']   = 'no1';
 $cfg['Servers'][$i]['host']      = 'mysql8';
 
-$i++; // server 2 :
-$cfg['Servers'][$i]['verbose']   = 'no2';
-$cfg['Servers'][$i]['host']      = 'mysql5';
+//$i++; // server 2 :
+//$cfg['Servers'][$i]['verbose']   = 'no2';
+//$cfg['Servers'][$i]['host']      = 'mysql5';
 
