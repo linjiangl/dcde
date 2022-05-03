@@ -86,17 +86,17 @@ services:
 #    networks:
 #      - default
 
-  hyperf:
-    image: hyperf/hyperf:${HYPERF_VERSION}
-    container_name: hyperf
-    restart: always
-    ports:
-      - '${HYPERF_HOST_PORT}:9501'
-    volumes:
-      - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
-    tty: true
-    networks:
-      - default
+#  hyperf:
+#    image: hyperf/hyperf:${HYPERF_VERSION}
+#    container_name: hyperf
+#    restart: always
+#    ports:
+#      - '${HYPERF_HOST_PORT}:9501'
+#    volumes:
+#      - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
+#    tty: true
+#    networks:
+#      - default
 
   mysql8:
     image: mysql/mysql-server:${MYSQL8_VERSION}
