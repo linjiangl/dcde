@@ -22,6 +22,7 @@
 │   ├── nginx                   Nginx 配置文件目录
 │   ├── php74                   PHP74 配置文件目录
 │   ├── php80                   PHP80 配置文件目录
+│   ├── php81                   PHP81 配置文件目录
 │   ├── phpmyadmin              phpmyadmin 配置文件目录
 │   ├── rabbitmq                rabbitmq 配置文件目录
 │   ├── redis                   redis 配置文件目录
