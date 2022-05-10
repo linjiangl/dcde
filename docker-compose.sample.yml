@@ -98,6 +98,21 @@ services:
 #    networks:
 #      - default
 
+#  golang:
+#    build:
+#      context: ./services/golang
+#      args:
+#        GOLANG_VERSION: ${GOLANG_VERSION}
+#    container_name: golang
+#    restart: always
+#    tty: true
+#    ports:
+#      - "${GOLANG_HOST_PORT}:8901-8909"
+#    volumes:
+#      - ${GOLANG_WORK_DIR}:/app/:rw
+#    networks:
+#      - default
+
   mysql8:
     image: mysql/mysql-server:${MYSQL8_VERSION}
     container_name: mysql8
