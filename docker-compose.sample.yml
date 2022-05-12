@@ -91,7 +91,7 @@ services:
 #    container_name: hyperf
 #    restart: always
 #    ports:
-#      - '${HYPERF_HOST_PORT}:9501'
+#      - '${HYPERF_HOST_PORT}:9501-9509'
 #    volumes:
 #      - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
 #    tty: true
@@ -107,7 +107,7 @@ services:
 #    restart: always
 #    tty: true
 #    ports:
-#      - "${GOLANG_HOST_PORT}:8901-8909"
+#      - "${GOLANG_HOST_PORT}:9601-9609"
 #    volumes:
 #      - ${GOLANG_WORK_DIR}:/app/:rw
 #    networks:
