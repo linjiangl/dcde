@@ -113,6 +113,21 @@ services:
 #    networks:
 #      - default
 
+#  java:
+#    build:
+#      context: ./services/java
+#      args:
+#        JAVA_VERSION: ${JAVA_VERSION}
+#    container_name: java
+#    restart: always
+#    tty: true
+#    ports:
+#      - "${JAVA_HOST_PORT}:9701-9709"
+#    volumes:
+#      - ${JAVA_WORK_DIR}:/app/:rw
+#    networks:
+#      - default
+
   mysql8:
     image: mysql/mysql-server:${MYSQL8_VERSION}
     container_name: mysql8
