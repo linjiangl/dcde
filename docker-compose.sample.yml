@@ -318,13 +318,13 @@ services:
 #      args:
 #        NODE_VERSION: ${NODE_VERSION}
 #    container_name: node
+#    restart: always
+#    tty: true
 #    environment:
 #      - NODE_ENV=production
 #    volumes:
 #      - ${NODE_WORK_DIR}:/app/:rw
 #      - ${SOURCE_DIR}:/www/:rw
-#    stdin_open: true
-#    tty: true
 #    expose:
 #      - "8081"
 #    networks:
