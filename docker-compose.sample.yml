@@ -334,18 +334,22 @@ services:
 #      - "${LOGSTASH_HOST_PORT_S}:5044"
 
 #  node:
-#    image: node:${NODE_VERSION}
+#    build:
+#      context: ./services/node
+#      args:
+#        NODE_VERSION: ${NODE_VERSION}
 #    container_name: node
+#    restart: always
+#    tty: true
 #    environment:
 #      - NODE_ENV=production
 #    volumes:
+#      - ${NODE_WORK_DIR}:/app/:rw
 #      - ${SOURCE_DIR}:/www/:rw
 #    expose:
 #      - "8081"
 #    networks:
 #      - default
-#    stdin_open: true
-#    tty: true
 
 
 #  supervisor:
