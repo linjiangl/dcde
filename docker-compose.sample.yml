@@ -49,6 +49,26 @@ services:
 #    networks:
 #      - default
 
+#  php72:
+#    build:
+#      context: ./services/php72
+#      args:
+#        PHP_VERSION: php:${PHP72_VERSION}-fpm-alpine
+#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+#        TZ: "$TZ"
+#    container_name: php72
+#    volumes:
+#      - ${SOURCE_DIR}:/www/:rw
+#      - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP72_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP72_LOG_DIR}:/var/log/php
+#    restart: always
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
+
   php74:
     build:
       context: ./services/php74
