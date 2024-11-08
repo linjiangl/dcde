@@ -1,7 +1,7 @@
 ARG GOLANG_VERSION
 
 # Start from golang:xx-alpine base image
-FROM golang:${GOLANG_VERSION}-alpine
+FROM golang:${GOLANG_VERSION}
 
 # The latest alpine images don't have some tools like (`git` and `bash`).
 # Adding git, bash and openssh to the image
