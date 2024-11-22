@@ -140,13 +140,17 @@ services:
 #      - default
 
 #  hyperf:
-#    image: hyperf/hyperf:${HYPERF_VERSION}
+#    build:
+#      context: ./services/hyperf
+#      args:
+#        HYPERF_VERSION: hyperf/hyperf:${HYPERF_VERSION}
+#        TZ: "$TZ"
 #    container_name: hyperf
-#    restart: always
 #    ports:
 #      - '${HYPERF_HOST_PORT}:9501-9509'
 #    volumes:
 #      - ${HYPERF_WORK_DIR}:/hyperf-skeleton/:rw
+#    restart: always
 #    tty: true
 #    networks:
 #      - default
