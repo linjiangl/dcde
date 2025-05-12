@@ -139,6 +139,30 @@ services:
 #    networks:
 #      - default
 
+  php82:
+    build:
+      context: ./services/php82
+      args:
+        DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
+        PHP_VERSION: php:${PHP82_VERSION}-fpm
+        PHP_EXTENSIONS: "$PHP82_EXTENSIONS"
+        TZ: "$TZ"
+    container_name: php82
+    ports:
+      - "18280-18289:18280-18289"
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ${PHP82_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP82_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf
+      - ${PHP82_LOG_DIR}:/var/log/php
+    restart: always
+    depends_on:
+      - nginx
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
 #  hyperf:
 #    build:
 #      context: ./services/hyperf
