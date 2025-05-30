@@ -69,51 +69,51 @@ services:
 #    networks:
 #      - default
 
-  php74:
-    build:
-      context: ./services/php74
-      args:
-        PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
-        TZ: "$TZ"
-    container_name: php74
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP_LOG_DIR}:/var/log/php
-    restart: always
-    depends_on:
-      - nginx
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - default
+#  php74:
+#    build:
+#      context: ./services/php74
+#      args:
+#        PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
+#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+#        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+#        TZ: "$TZ"
+#    container_name: php74
+#    volumes:
+#      - ${SOURCE_DIR}:/www/:rw
+#      - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP_LOG_DIR}:/var/log/php
+#    restart: always
+#    depends_on:
+#      - nginx
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
 
-  php80:
-    build:
-      context: ./services/php80
-      args:
-        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
-        TZ: "$TZ"
-    container_name: php80
-    ports:
-      - "18080-18089:18080-18089"
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP80_LOG_DIR}:/var/log/php
-    restart: always
-    depends_on:
-      - nginx
-    cap_add:
-      - SYS_PTRACE
-    networks:
-      - default
+#  php80:
+#    build:
+#      context: ./services/php80
+#      args:
+#        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
+#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+#        TZ: "$TZ"
+#    container_name: php80
+#    ports:
+#      - "18080-18089:18080-18089"
+#    volumes:
+#      - ${SOURCE_DIR}:/www/:rw
+#      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+#      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+#      - ${PHP80_LOG_DIR}:/var/log/php
+#    restart: always
+#    depends_on:
+#      - nginx
+#    cap_add:
+#      - SYS_PTRACE
+#    networks:
+#      - default
 
 #  php81:
 #    build:
@@ -198,6 +198,7 @@ services:
 #    build:
 #      context: ./services/java
 #      args:
+#        DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
 #        JAVA_VERSION: ${JAVA_VERSION}
 #    container_name: java
 #    restart: always
@@ -210,7 +211,7 @@ services:
 #      - default
 
   mysql8:
-    image: mysql/mysql-server:${MYSQL8_VERSION}
+    image: mysql:${MYSQL8_VERSION}
     container_name: mysql8
     ports:
       - "${MYSQL8_HOST_PORT}:3306"
@@ -286,34 +287,34 @@ services:
 #    networks:
 #      - default
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin
-    ports:
-      - "${PHPMYADMIN_HOST_PORT}:80"
-    volumes:
-      - ${PHPMYADMIN_USER_CONF_FILE}:/etc/phpmyadmin/config.user.inc.php:ro
-      - ${PHPMYADMIN_PHP_CONF_FILE}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini:ro
-    environment:
-      - PMA_HOST=mysql8
-      - PMA_PORT=3306
-      - TZ=$TZ
-    restart: always
-    networks:
-      - default
-
-  phpredisadmin:
-    image: erikdubbelboer/phpredisadmin:latest
-    container_name: phpredisadmin
-    ports:
-      - "${REDISMYADMIN_HOST_PORT}:80"
-    environment:
-      - REDIS_1_HOST=redis
-      - REDIS_1_PORT=6379
-      - TZ=$TZ
-    restart: always
-    networks:
-      - default
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin:latest
+#    container_name: phpmyadmin
+#    ports:
+#      - "${PHPMYADMIN_HOST_PORT}:80"
+#    volumes:
+#      - ${PHPMYADMIN_USER_CONF_FILE}:/etc/phpmyadmin/config.user.inc.php:ro
+#      - ${PHPMYADMIN_PHP_CONF_FILE}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini:ro
+#    environment:
+#      - PMA_HOST=mysql8
+#      - PMA_PORT=3306
+#      - TZ=$TZ
+#    restart: always
+#    networks:
+#      - default
+#
+#  phpredisadmin:
+#    image: erikdubbelboer/phpredisadmin:latest
+#    container_name: phpredisadmin
+#    ports:
+#      - "${REDISMYADMIN_HOST_PORT}:80"
+#    environment:
+#      - REDIS_1_HOST=redis
+#      - REDIS_1_PORT=6379
+#      - TZ=$TZ
+#    restart: always
+#    networks:
+#      - default
 
 #  mongodb:
 #    image: mongo:${MONGODB_VERSION}

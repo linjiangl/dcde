@@ -1,15 +1,16 @@
 ARG JAVA_VERSION
-
 # Start from openjdk:xx-slim base image
 FROM openjdk:${JAVA_VERSION}-slim
 
-# change sources.list
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
+ARG DEBIAN_MIRROR_DOMAIN
 
-# The latest alpine images don't have some tools like (`git` and `bash`).
-# Adding git, bash and openssh to the image
-RUN apt update && apt upgrade -y && \
-    apt install git -y
+# Set debian mirror
+RUN sed -i "s|deb.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list.d/debian.sources
+
+# Install required packages
+RUN export option="--no-install-recommends -y" \
+    && apt-get $option update \
+    && apt-get $option install git openssh-client curl vim rsync procps iputils-ping vim-tiny unzip htop tzdata
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
