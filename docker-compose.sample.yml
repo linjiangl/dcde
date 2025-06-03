@@ -274,16 +274,16 @@ services:
 #      context: ./services/rabbitmq
 #      args:
 #        RABBITMQ_VERSION: ${RABBITMQ_VERSION}
+#        RABBITMQ_PLUGINS: ${RABBITMQ_PLUGINS}
 #    container_name: rabbitmq
+#    restart: always
 #    ports:
 #      - "${RABBITMQ_HOST_PORT_C}:5672"
 #      - "${RABBITMQ_HOST_PORT_S}:15672"
 #    environment:
 #      TZ: "$TZ"
-#      RABBITMQ_USERNAME: "${RABBITMQ_DEFAULT_USER}"
-#      RABBITMQ_PASSWORD: "${RABBITMQ_DEFAULT_PASS}"
-#      RABBITMQ_PLUGINS: "${RABBITMQ_PLUGINS}"
-#    restart: always
+#      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+#      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
 #    networks:
 #      - default
 
@@ -361,6 +361,8 @@ services:
 #    volumes:
 #      - ${DATA_DIR}/esdata:/usr/share/elasticsearch/data
 #      - ${ELASTICSEARCH_CONF_FILE}:/usr/share/elasticsearch/config/elasticsearch.yml
+#      - ${ELASTICSEARCH_JVM_CONF_FILE}:/usr/share/elasticsearch/config/jvm.options
+#      - ${ELASTICSEARCH_LOG4J2_CONF_FILE}:/usr/share/elasticsearch/config/log4j2.properties
 #    hostname: elasticsearch
 #    restart: always
 #    ports:
