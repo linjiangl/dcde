@@ -289,19 +289,6 @@ services:
 #    restart: always
 #    networks:
 #      - default
-#
-#  phpredisadmin:
-#    image: erikdubbelboer/phpredisadmin:latest
-#    container_name: phpredisadmin
-#    ports:
-#      - "${REDISMYADMIN_HOST_PORT}:80"
-#    environment:
-#      - REDIS_1_HOST=redis
-#      - REDIS_1_PORT=6379
-#      - TZ=$TZ
-#    restart: always
-#    networks:
-#      - default
 
 #  mongodb:
 #    image: mongo:${MONGODB_VERSION}
@@ -320,19 +307,6 @@ services:
 #       - default
 #    command:
 #       --auth
-
-#  adminmongo:
-#    image: mrvautin/adminmongo
-#    container_name: adminmongo
-#    ports:
-#      - "${ADMINMONGO_HOST_PORT}:1234"
-#    environment:
-#      - HOST=0.0.0.0
-#      - DB_HOST=mongodb
-#      - DB_PORT=27017
-#    restart: always
-#    networks:
-#      - default
 
 #  elasticsearch:
 #    build:
