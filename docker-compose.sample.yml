@@ -228,7 +228,7 @@ services:
       - default
 
 #  mysql5:
-#    image: mysql/mysql-server:${MYSQL5_VERSION}
+#    image: mysql:${MYSQL5_VERSION}
 #    container_name: mysql5
 #    ports:
 #      - "${MYSQL5_HOST_PORT}:3306"
