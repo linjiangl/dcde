@@ -109,9 +109,9 @@ RUN if [[ -z "${PLUGINS##*,amazon-ec2,*}" ]]; then \
     fi \
     && \
     if [[ -z "${PLUGINS##*,analysis-ik,*}" ]]; then \
-        printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-ik/releases/download/v${ELASTIC_VERSION}/elasticsearch-analysis-ik-${ELASTIC_VERSION}.zip; \
+        printf "y\n" | elasticsearch-plugin install https://release.infinilabs.com/analysis-ik/stable/elasticsearch-analysis-ik-${ELASTIC_VERSION}.zip; \
     fi \
     && \
     if [[ -z "${PLUGINS##*,analysis-pinyin,*}" ]]; then \
-      printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-pinyin/releases/download/v${ELASTIC_VERSION}/elasticsearch-analysis-pinyin-${ELASTIC_VERSION}.zip; \
+      printf "y\n" | elasticsearch-plugin install https://release.infinilabs.com/analysis-pinyin/stable/elasticsearch-analysis-pinyin-${ELASTIC_VERSION}.zip; \
     fi
