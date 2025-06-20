@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   nginx:
     build:
@@ -188,6 +188,24 @@ services:
 #    networks:
 #      - default
 
+#  node:
+#    build:
+#      context: ./services/node
+#      args:
+#        NODE_VERSION: ${NODE_VERSION}
+#    container_name: node
+#    restart: always
+#    tty: true
+#    environment:
+#      - NODE_ENV=production
+#    volumes:
+#      - ${NODE_WORK_DIR}:/app:rw
+#      - ${SOURCE_DIR}:/www:rw
+#    expose:
+#      - "8081"
+#    networks:
+#      - default
+
   mysql8:
     build:
       context: ./services/mysql8
@@ -275,7 +293,8 @@ services:
 #      - default
 
 #  phpmyadmin:
-#    image: phpmyadmin/phpmyadmin:latest
+#    build:
+#      context: ./services/phpmyadmin
 #    container_name: phpmyadmin
 #    ports:
 #      - "${PHPMYADMIN_HOST_PORT}:80"
@@ -303,75 +322,71 @@ services:
 #    ports:
 #       - "${MONGODB_HOST_PORT}:27017"
 #    restart: always
-#    networks:
-#       - default
 #    command:
 #       --auth
+#    networks:
+#       - default
 
 #  elasticsearch:
 #    build:
-#      context: ./services/elasticsearch
+#      context: ./services/elk/elasticsearch
 #      args:
-#        ELASTICSEARCH_VERSION: ${ELASTICSEARCH_VERSION}
+#        ELASTIC_VERSION: ${ELASTIC_VERSION}
 #        ELASTICSEARCH_PLUGINS: ${ELASTICSEARCH_PLUGINS}
 #    container_name: elasticsearch
 #    environment:
-#      - TZ=$TZ
-#      - discovery.type=single-node
-#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#      node.name: elasticsearch
+#      ES_JAVA_OPTS: -Xms512m -Xmx512m
+#      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+#      discovery.type: single-node
 #    volumes:
-#      - ${DATA_DIR}/esdata:/usr/share/elasticsearch/data
-#      - ${ELASTICSEARCH_CONF_FILE}:/usr/share/elasticsearch/config/elasticsearch.yml
-#      - ${ELASTICSEARCH_JVM_CONF_FILE}:/usr/share/elasticsearch/config/jvm.options
-#      - ${ELASTICSEARCH_LOG4J2_CONF_FILE}:/usr/share/elasticsearch/config/log4j2.properties
-#    hostname: elasticsearch
-#    restart: always
+#      - ${SERVICES_DIR}/elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,Z
+#      - ${DATA_DIR}/es-data:/usr/share/elasticsearch/data:Z
 #    ports:
-#      - "${ELASTICSEARCH_HOST_PORT_C}:9200"
-#      - "${ELASTICSEARCH_HOST_PORT_S}:9300"
-
-#  kibana:
-#    image: kibana:${KIBANA_VERSION}
-#    container_name: kibana
-#    environment:
-#      TZ: "$TZ"
-#      elasticsearch.hosts: http://elasticsearch:9200
-#      I18N_LOCALE: "${KIBANA_I18N_LOCALE}"
-#    hostname: kibana
-#    depends_on:
-#      - elasticsearch
-#    restart: always
-#    ports:
-#      - "${KIBANA_HOST}:5601"
-
+#      - "9200:9200"
+#      - "9300:9300"
+#    restart: unless-stopped
+#    networks:
+#      - default
+#
 #  logstash:
-#    image: logstash:${LOGSTASH_VERSION}
+#    build:
+#      context: ./services/elk/logstash
+#      args:
+#        ELASTIC_VERSION: ${ELASTIC_VERSION}
 #    container_name: logstash
-#    hostname: logstash
-#    restart: always
+#    volumes:
+#      - ${SERVICES_DIR}/elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+#      - ${SERVICES_DIR}/elk/logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+#    environment:
+#      LS_JAVA_OPTS: -Xms256m -Xmx256m
+#      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD}
+#    ports:
+#      - "5044:5044"
+#      - "50000:50000/tcp"
+#      - "50000:50000/udp"
+#      - "9600:9600"
 #    depends_on:
 #      - elasticsearch
-#    environment:
-#      TZ: "$TZ"
-#    ports:
-#      - "${LOGSTASH_HOST_PORT_C}:9600"
-#      - "${LOGSTASH_HOST_PORT_S}:5044"
-
-#  node:
+#    restart: unless-stopped
+#    networks:
+#      - default
+#
+#  kibana:
 #    build:
-#      context: ./services/node
+#      context: ./services/elk/kibana
 #      args:
-#        NODE_VERSION: ${NODE_VERSION}
-#    container_name: node
-#    restart: always
-#    tty: true
-#    environment:
-#      - NODE_ENV=production
+#        ELASTIC_VERSION: ${ELASTIC_VERSION}
+#    container_name: kibana
+#    ports:
+#      - "5601:5601"
 #    volumes:
-#      - ${NODE_WORK_DIR}:/app:rw
-#      - ${SOURCE_DIR}:/www:rw
-#    expose:
-#      - "8081"
+#      - ${SERVICES_DIR}/elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+#    environment:
+#      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+#    depends_on:
+#      - elasticsearch
+#    restart: unless-stopped
 #    networks:
 #      - default
 

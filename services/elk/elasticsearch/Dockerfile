@@ -1,7 +1,9 @@
-ARG ELASTICSEARCH_VERSION
-FROM elasticsearch:${ELASTICSEARCH_VERSION}
+ARG ELASTIC_VERSION
 
-ARG ELASTICSEARCH_VERSION
+FROM elasticsearch:${ELASTIC_VERSION}
+
+# Add your elasticsearch plugins setup here
+ARG ELASTIC_VERSION
 ARG ELASTICSEARCH_PLUGINS
 
 ENV PLUGINS=",${ELASTICSEARCH_PLUGINS},"
@@ -107,9 +109,9 @@ RUN if [[ -z "${PLUGINS##*,amazon-ec2,*}" ]]; then \
     fi \
     && \
     if [[ -z "${PLUGINS##*,analysis-ik,*}" ]]; then \
-        printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-ik/releases/download/v${ELASTICSEARCH_VERSION}/elasticsearch-analysis-ik-${ELASTICSEARCH_VERSION}.zip; \
+        printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-ik/releases/download/v${ELASTIC_VERSION}/elasticsearch-analysis-ik-${ELASTIC_VERSION}.zip; \
     fi \
     && \
     if [[ -z "${PLUGINS##*,analysis-pinyin,*}" ]]; then \
-      printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-pinyin/releases/download/v${ELASTICSEARCH_VERSION}/elasticsearch-analysis-pinyin-${ELASTICSEARCH_VERSION}.zip; \
+      printf "y\n" | elasticsearch-plugin install https://github.com/infinilabs/analysis-pinyin/releases/download/v${ELASTIC_VERSION}/elasticsearch-analysis-pinyin-${ELASTIC_VERSION}.zip; \
     fi
