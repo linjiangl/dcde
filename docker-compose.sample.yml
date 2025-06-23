@@ -31,7 +31,7 @@ services:
 #    build:
 #      context: ./services/php72
 #      args:
-#        PHP_VERSION: php:${PHP72_VERSION}-fpm-alpine
+#        PHP_VERSION: ${PHP72_VERSION}
 #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
 #        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
 #        TZ: "$TZ"
@@ -51,7 +51,7 @@ services:
 #    build:
 #      context: ./services/php74
 #      args:
-#        PHP_VERSION: php:${PHP_VERSION}-fpm-alpine
+#        PHP_VERSION: ${PHP_VERSION}
 #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
 #        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
 #        TZ: "$TZ"
@@ -69,60 +69,60 @@ services:
 #    networks:
 #      - default
 
-#  php80:
-#    build:
-#      context: ./services/php80
-#      args:
-#        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
-#        TZ: "$TZ"
-#    container_name: php80
-#    ports:
-#      - "18080-18089:18080-18089"
-#    volumes:
-#      - ${SOURCE_DIR}:/www:rw
-#      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-#      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-#      - ${PHP80_LOG_DIR}:/var/log/php
-#    restart: always
-#    depends_on:
-#      - nginx
-#    cap_add:
-#      - SYS_PTRACE
-#    networks:
-#      - default
+  php80:
+    build:
+      context: ./services/php80
+      args:
+        PHP_VERSION: ${PHP80_VERSION}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+        TZ: "$TZ"
+    container_name: php80
+    ports:
+      - "18080-18089:18080-18089"
+    volumes:
+      - ${SOURCE_DIR}:/www:rw
+      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP80_LOG_DIR}:/var/log/php
+    restart: always
+    depends_on:
+      - nginx
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
 
-#  php81:
-#    build:
-#      context: ./services/php81
-#      args:
-#        PHP_VERSION: php:${PHP81_VERSION}-fpm-alpine
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
-#        TZ: "$TZ"
-#    container_name: php81
-#    ports:
-#      - "18180-18189:18180-18189"
-#    volumes:
-#      - ${SOURCE_DIR}:/www:rw
-#      - ${PHP81_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-#      - ${PHP81_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-#      - ${PHP81_LOG_DIR}:/var/log/php
-#    restart: always
-#    depends_on:
-#      - nginx
-#    cap_add:
-#      - SYS_PTRACE
-#    networks:
-#      - default
+  php81:
+    build:
+      context: ./services/php81
+      args:
+        PHP_VERSION: ${PHP81_VERSION}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
+        TZ: "$TZ"
+    container_name: php81
+    ports:
+      - "18180-18189:18180-18189"
+    volumes:
+      - ${SOURCE_DIR}:/www:rw
+      - ${PHP81_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP81_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP81_LOG_DIR}:/var/log/php
+    restart: always
+    depends_on:
+      - nginx
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
 
   php82:
     build:
       context: ./services/php82
       args:
         DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
-        PHP_VERSION: php:${PHP82_VERSION}-fpm
+        PHP_VERSION: ${PHP82_VERSION}
         PHP_EXTENSIONS: "$PHP82_EXTENSIONS"
         TZ: "$TZ"
     container_name: php82
@@ -141,21 +141,21 @@ services:
     networks:
       - default
 
-#  hyperf:
-#    build:
-#      context: ./services/hyperf
-#      args:
-#        HYPERF_VERSION: hyperf/hyperf:${HYPERF_VERSION}
-#        TZ: "$TZ"
-#    container_name: hyperf
-#    ports:
-#      - '${HYPERF_HOST_PORT}:9501-9509'
-#    volumes:
-#      - ${HYPERF_WORK_DIR}:/hyperf-skeleton:rw
-#    restart: always
-#    tty: true
-#    networks:
-#      - default
+  hyperf:
+    build:
+      context: ./services/hyperf
+      args:
+        HYPERF_VERSION: hyperf/hyperf:${HYPERF_VERSION}
+        TZ: "$TZ"
+    container_name: hyperf
+    ports:
+      - '${HYPERF_HOST_PORT}:9501-9509'
+    volumes:
+      - ${HYPERF_WORK_DIR}:/hyperf-skeleton:rw
+    restart: always
+    tty: true
+    networks:
+      - default
 
 #  golang:
 #    build:
