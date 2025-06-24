@@ -12,7 +12,7 @@ RUN sed -i "s|deb.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list.d/
 
 # Install required packages
 RUN export option="--no-install-recommends -y" \
-    && apt $option update \
+    && apt-get $option update \
     && apt-get $option install git openssh-client curl vim rsync procps iputils-ping vim-tiny unzip htop tzdata
 
 # Clean up the package list to reduce image size
