@@ -35,8 +35,8 @@
 
 # 安装
 ```
-$ git clone git@github.com:linjiangl/docker-web-server.git 
-$ cd docker-web-server
+$ git clone git@github.com:linjiangl/dcde.git
+$ cd dcde
 $ cp .env.sample .env
 $ cp docker-compose.sample.yml docker-compose.yml
 $ docker-compose build
