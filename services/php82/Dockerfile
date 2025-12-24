@@ -24,7 +24,7 @@ RUN curl -sSLf -o /usr/local/bin/install-php-extensions https://github.com/mloca
 && install-php-extensions $PHP_EXTENSIONS
 
 # Install composer and change it's cache home
-RUN curl -o /usr/bin/composer https://mirrors.aliyun.com/composer/composer.phar && chmod +x /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_HOME=/tmp/composer
 
 # Set work directory
