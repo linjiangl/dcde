@@ -7,25 +7,22 @@ ARG DEBIAN_MIRROR_DOMAIN
 
 ENV TZ=${TZ}
 
-# Set debian mirror
-RUN sed -i "s|deb.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list.d/debian.sources
+RUN if [ -n "${DEBIAN_MIRROR_DOMAIN}" ]; then \
+        sed -i "s|deb.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list.d/debian.sources \
+        && sed -i "s|security.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list.d/debian.sources; \
+    fi
 
-# Install required packages
 RUN export option="--no-install-recommends -y" \
     && apt-get $option update \
     && apt-get $option install git openssh-client curl vim rsync procps iputils-ping vim-tiny unzip htop tzdata
 
-# Clean up the package list to reduce image size
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
 COPY install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions \
     && install-php-extensions $PHP_EXTENSIONS
 
-# Install composer and change it's cache home
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_HOME=/tmp/composer
 
-# Set work directory
 WORKDIR /www
