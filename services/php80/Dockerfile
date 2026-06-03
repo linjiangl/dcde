@@ -1,39 +1,28 @@
 ARG PHP_VERSION
-FROM php:${PHP_VERSION}-fpm-alpine
+FROM php:${PHP_VERSION}-fpm
 
 ARG TZ
 ARG PHP_EXTENSIONS
-ARG CONTAINER_PACKAGE_URL
+ARG DEBIAN_MIRROR_DOMAIN
 
+ENV TZ=${TZ}
 
-RUN if [ $CONTAINER_PACKAGE_URL ] ; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories ; fi
+RUN if [ -n "${DEBIAN_MIRROR_DOMAIN}" ]; then \
+        sed -i "s|deb.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list \
+        && sed -i "s|security.debian.org|${DEBIAN_MIRROR_DOMAIN}|g" /etc/apt/sources.list; \
+    fi
 
-COPY ./extensions /tmp/extensions
-WORKDIR /tmp/extensions
-RUN chmod +x install.sh \
-    && sh install.sh \
-    && rm -rf /tmp/extensions
+RUN export option="--no-install-recommends -y" \
+    && apt-get $option update \
+    && apt-get $option install git openssh-client curl vim rsync procps iputils-ping vim-tiny unzip htop tzdata
 
-ADD ./extensions/install-php-extensions  /usr/local/bin/
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN chmod uga+x /usr/local/bin/install-php-extensions
+COPY install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions \
+    && install-php-extensions $PHP_EXTENSIONS
 
-RUN apk --no-cache add tzdata git openssh vim \
-    && cp "/usr/share/zoneinfo/$TZ" /etc/localtime \
-    && echo "$TZ" > /etc/timezone
-
-
-# Fix: https://github.com/docker-library/php/issues/240
-RUN apk add gnu-libiconv libstdc++ --no-cache --repository http://${CONTAINER_PACKAGE_URL}/alpine/edge/community/ --allow-untrusted
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
-
-
-# Install composer and change it's cache home
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_HOME=/tmp/composer
-
-# php image's www-data user uid & gid are 82, change them to 1000 (primary user)
-RUN apk --no-cache add shadow && usermod -u 1000 www-data && groupmod -g 1000 www-data
-
 
 WORKDIR /www

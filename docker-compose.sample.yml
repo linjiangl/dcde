@@ -32,8 +32,7 @@ services:
 #      context: ./services/php72
 #      args:
 #        PHP_VERSION: ${PHP72_VERSION}
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+#        PHP_EXTENSIONS: "$PHP72_EXTENSIONS"
 #        TZ: "$TZ"
 #    container_name: php72
 #    volumes:
@@ -52,9 +51,9 @@ services:
 #      context: ./services/php74
 #      args:
 #        PHP_VERSION: ${PHP_VERSION}
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP_EXTENSIONS}
+#        PHP_EXTENSIONS: "$PHP_EXTENSIONS"
 #        TZ: "$TZ"
+#        DEBIAN_MIRROR_DOMAIN: "$DEBIAN_MIRROR_DOMAIN"
 #    container_name: php74
 #    volumes:
 #      - ${SOURCE_DIR}:/www:rw
@@ -74,9 +73,9 @@ services:
 #      context: ./services/php80
 #      args:
 #        PHP_VERSION: ${PHP80_VERSION}
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+#        PHP_EXTENSIONS: "$PHP80_EXTENSIONS"
 #        TZ: "$TZ"
+#        DEBIAN_MIRROR_DOMAIN: "$DEBIAN_MIRROR_DOMAIN"
 #    container_name: php80
 #    ports:
 #      - "18080-18089:18080-18089"
@@ -98,8 +97,8 @@ services:
 #      context: ./services/php81
 #      args:
 #        PHP_VERSION: ${PHP81_VERSION}
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#        PHP_EXTENSIONS: ${PHP81_EXTENSIONS}
+#        DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
+#        PHP_EXTENSIONS: "$PHP81_EXTENSIONS"
 #        TZ: "$TZ"
 #    container_name: php81
 #    ports:
