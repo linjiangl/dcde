@@ -17,18 +17,26 @@
 ├── docs                        文档目录
 ├── logs                        日志目录
 ├── services                    服务构建文件和配置文件目录
-│   ├── elasticsearch           ElasticSearch 配置文件目录
-│   ├── golang                  Golang 配置文件目录
-│   ├── mysql5                  MySQL5 配置文件目录
-│   ├── mysql8                  MySQL8 配置文件目录
-│   ├── nginx                   Nginx 配置文件目录
-│   ├── php74                   PHP74 配置文件目录
-│   ├── php80                   PHP80 配置文件目录
-│   ├── php81                   PHP81 配置文件目录
-│   ├── phpmyadmin              phpmyadmin 配置文件目录
-│   ├── rabbitmq                rabbitmq 配置文件目录
-│   ├── redis                   redis 配置文件目录
-│   └── supervisor              supervisor 配置文件目录
+│   ├── elk                     Elasticsearch, Logstash, Kibana 配置文件目录
+│   ├── golang                  Golang 配置文件目录
+│   ├── hyperf                  Hyperf 配置文件目录
+│   ├── java                    Java 配置文件目录
+│   ├── mysql                   MySQL 配置文件目录
+│   │   ├── mysql5              MySQL5 配置文件目录
+│   │   ├── mysql8              MySQL8 配置文件目录
+│   │   └── phpmyadmin          phpMyAdmin 配置文件目录
+│   ├── nginx                   Nginx 配置文件目录
+│   ├── node                    Node 配置文件目录
+│   ├── php                     PHP 配置文件目录
+│   │   ├── php74               PHP74 配置文件目录
+│   │   ├── php80               PHP80 配置文件目录
+│   │   ├── php81               PHP81 配置文件目录
+│   │   ├── php82               PHP82 配置文件目录
+│   │   └── php84               PHP84 配置文件目录
+│   ├── postgres                Postgres 配置文件目录
+│   ├── rabbitmq                RabbitMQ 配置文件目录
+│   ├── redis                   Redis 配置文件目录
+│   └── supervisor              Supervisor 配置文件目录
 ├── work                        工作目录
 │   ├── golang                  Golang 程序目录
 │   └── hyperf                  Hyperf 程序目录
@@ -49,8 +57,8 @@ $ docker-compose up -d
 ``` 
 $ docker-compose up                         # 创建并且启动所有容器
 $ docker-compose up -d                      # 创建并且后台运行方式启动所有容器
-$ docker-compose up nginx php80 mysql8      # 创建并且启动nginx、php、mysql的多个容器
-$ docker-compose up -d nginx php80 mysql8   # 创建并且已后台运行的方式启动nginx、php、mysql容器
+$ docker-compose up nginx php82 mysql8      # 创建并且启动nginx、php、mysql的多个容器
+$ docker-compose up -d nginx php82 mysql8   # 创建并且已后台运行的方式启动nginx、php、mysql容器
 
 $ docker-compose start nginx                # 启动服务
 $ docker-compose stop nginx                 # 停止服务

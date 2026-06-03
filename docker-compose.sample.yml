@@ -29,7 +29,8 @@ services:
 
 #  php72:
 #    build:
-#      context: ./services/php72
+#      context: ./services/php
+#      dockerfile: php72/Dockerfile
 #      args:
 #        PHP_VERSION: ${PHP72_VERSION}
 #        PHP_EXTENSIONS: "$PHP72_EXTENSIONS"
@@ -48,7 +49,8 @@ services:
 
 #  php74:
 #    build:
-#      context: ./services/php74
+#      context: ./services/php
+#      dockerfile: php74/Dockerfile
 #      args:
 #        PHP_VERSION: ${PHP_VERSION}
 #        PHP_EXTENSIONS: "$PHP_EXTENSIONS"
@@ -70,7 +72,8 @@ services:
 
 #  php80:
 #    build:
-#      context: ./services/php80
+#      context: ./services/php
+#      dockerfile: php80/Dockerfile
 #      args:
 #        PHP_VERSION: ${PHP80_VERSION}
 #        PHP_EXTENSIONS: "$PHP80_EXTENSIONS"
@@ -94,7 +97,8 @@ services:
 #
 #  php81:
 #    build:
-#      context: ./services/php81
+#      context: ./services/php
+#      dockerfile: php81/Dockerfile
 #      args:
 #        PHP_VERSION: ${PHP81_VERSION}
 #        DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
@@ -118,7 +122,8 @@ services:
 
   php82:
     build:
-      context: ./services/php82
+      context: ./services/php
+      dockerfile: php82/Dockerfile
       args:
         DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
         PHP_VERSION: ${PHP82_VERSION}
@@ -142,7 +147,8 @@ services:
 
 #  php84:
 #    build:
-#      context: ./services/php84
+#      context: ./services/php
+#      dockerfile: php84/Dockerfile
 #      args:
 #        DEBIAN_MIRROR_DOMAIN: ${DEBIAN_MIRROR_DOMAIN}
 #        PHP_VERSION: ${PHP84_VERSION}
@@ -232,7 +238,8 @@ services:
 
   mysql8:
     build:
-      context: ./services/mysql8
+      context: ./services/mysql
+      dockerfile: mysql8/Dockerfile
       args:
         MYSQL_VERSION: ${MYSQL8_VERSION}
     container_name: mysql8
@@ -252,7 +259,8 @@ services:
 
 #  mysql5:
 #    build:
-#      context: ./services/mysql5
+#      context: ./services/mysql
+#      dockerfile: mysql5/Dockerfile
 #      args:
 #        MYSQL_VERSION: ${MYSQL5_VERSION}
 #    container_name: mysql5
@@ -341,7 +349,7 @@ services:
 
 #  phpmyadmin:
 #    build:
-#      context: ./services/phpmyadmin
+#      context: ./services/mysql/phpmyadmin
 #    container_name: phpmyadmin
 #    ports:
 #      - "${PHPMYADMIN_HOST_PORT}:80"
